@@ -17,7 +17,6 @@ gem "jbuilder", "~> 2.5"
 # gem 'capistrano-rails', group: :development
 
 group :development do
-  # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem "web-console"
   # gem "listen", "~> 3.0.5"
   # gem "spring"
@@ -41,7 +40,6 @@ group :development, :test do
   # includes generators
   gem "rspec-rails"
   gem "factory_girl_rails"
-  # ==
 end
 
 group :test do

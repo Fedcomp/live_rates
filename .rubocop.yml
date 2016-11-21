@@ -1,5 +1,8 @@
 AllCops:
-  TargetRubyVersion: 2.1
+  TargetRubyVersion: 2.3
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
 Style/StringLiterals:
   EnforcedStyle: double_quotes
@@ -7,3 +10,7 @@ Style/StringLiterals:
 
 Metrics/LineLength:
   Max: 90
+
+# Controllers for example.
+Style/Documentation:
+  Enabled: false
