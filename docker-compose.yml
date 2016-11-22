@@ -1,0 +1,21 @@
+db:
+  image: postgres:9.6
+  volumes:
+    - live_rates_database:/var/lib/postgresql/data
+
+web: &web
+  build: .
+  volumes:
+    - .:/app
+    - live_rates_gems:/usr/local/bundle
+  links:
+    - db
+  ports:
+    - 3000:3000
+  env_file: docker/rails/development.env
+
+test:
+  <<: *web
+  command: ["bundle", "exec", "guard"]
+  ports: []
+  env_file: docker/rails/test.env
