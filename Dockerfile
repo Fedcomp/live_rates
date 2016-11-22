@@ -1,7 +1,6 @@
 FROM ruby:2.3.1
 
-RUN apt-get update
-RUN apt-get install -y libpq-dev
+RUN gem install bundler
 
 WORKDIR /app
 ADD . /app
