@@ -11,6 +11,13 @@ Style/StringLiterals:
 Metrics/LineLength:
   Max: 90
 
+# Chains of "end" is totally unreadable
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+
 # Controllers for example.
 Style/Documentation:
   Enabled: false

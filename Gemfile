@@ -16,6 +16,8 @@ gem "jbuilder", "~> 2.5"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem "typhoeus"
+
 group :development do
   gem "web-console"
   # gem "listen", "~> 3.0.5"
@@ -45,4 +47,5 @@ end
 group :test do
   gem "database_cleaner"
   gem "shoulda-matchers"
+  gem "webmock"
 end
