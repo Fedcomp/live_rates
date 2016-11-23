@@ -10,6 +10,7 @@ gem "uglifier", ">= 1.3.0"
 gem "coffee-rails", "~> 4.2"
 gem "jquery-rails"
 gem "bootstrap-sass", "~> 3.3.6"
+gem "chartkick"
 
 gem "jbuilder", "~> 2.5"
 gem "haml-rails", "~> 0.9"

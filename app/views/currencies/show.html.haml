@@ -1,0 +1,6 @@
+%h2 Exchange rate for #{@current_currency.symbol} (#{@current_currency.code})
+%br
+- @currencies.each do |currency|
+  - next if currency == @current_currency # skip current currency from comparison
+  %h4 compared to #{currency.symbol} (#{currency.code})
+  = rate_chart_for_currency(currency, @rates)

@@ -1,5 +1,5 @@
 namespace :exchange_rates do
-  desc "Fetch new rates for all supported currencies"
+  desc "Fetch new exchange rates for all supported currencies"
   task update_daemon: [:environment, :log_to_stdout] do
     Rails.logger.info "Starting exchange rates updater daemon"
 
