@@ -10,6 +10,7 @@ web: &web
     - live_rates_gems:/usr/local/bundle
   links:
     - db
+    - rate_updater
   ports:
     - 3000:3000
   env_file: docker/rails/development.env
@@ -20,7 +21,9 @@ test:
   ports: []
   env_file: docker/rails/test.env
 
-cron:
+rate_updater:
   <<: *web
+  links:
+    - db
   ports: []
-  command: ["dumb-init", "docker/rails/cron_entrypoint.sh"]
+  command: ["bundle", "exec", "rake", "exchange_rates:update_daemon"]

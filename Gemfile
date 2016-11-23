@@ -12,8 +12,6 @@ gem "therubyracer"
 gem "jquery-rails"
 gem "jbuilder", "~> 2.5"
 
-gem 'whenever', require: false
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
