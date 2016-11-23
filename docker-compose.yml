@@ -19,3 +19,8 @@ test:
   command: ["bundle", "exec", "guard"]
   ports: []
   env_file: docker/rails/test.env
+
+cron:
+  <<: *web
+  ports: []
+  command: ["dumb-init", "docker/rails/cron_entrypoint.sh"]
