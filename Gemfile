@@ -16,6 +16,7 @@ gem "jbuilder", "~> 2.5"
 # gem 'capistrano-rails', group: :development
 
 gem "typhoeus"
+gem "active_interaction", "~> 3.4"
 
 group :development do
   gem "web-console"

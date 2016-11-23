@@ -1,5 +1,9 @@
 FactoryGirl.define do
   factory :currency do
-    code { (0...3).map { (65 + rand(26)).chr }.join }
+    sequence(:code) do |n|
+      range = ("A".."Z").to_a
+      postfix = (0...2).map { range.sample }.join
+      "#{range[n]}#{postfix}"
+    end
   end
 end

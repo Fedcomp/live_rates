@@ -5,4 +5,10 @@ RSpec.describe Currency, type: :model do
 
   it { should allow_value("USD", "EUR").for(:code) }
   it { should_not allow_value("US", "U", nil).for(:code) }
+
+  describe "factory" do
+    it "should be valid" do
+      create :currency
+    end
+  end
 end

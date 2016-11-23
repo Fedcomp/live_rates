@@ -1,5 +1,5 @@
 # Live rates
-RUB to USD/EUR exchange rates viewer.
+USD/EUR exchange rates viewer.
 Stores rate dynamics with history.
 **Work in progress**
 

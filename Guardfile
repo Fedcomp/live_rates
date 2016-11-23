@@ -1,3 +1,6 @@
+require "pry-byebug"
+require "active_support/inflector"
+
 guard :bundler do
   require "guard/bundler"
   require "guard/bundler/verify"
@@ -35,6 +38,10 @@ guard :rspec, cmd: "bundle exec rspec" do
       rspec.spec.call("controllers/#{m[1]}_controller"),
       rspec.spec.call("acceptance/#{m[1]}")
     ]
+  end
+
+  watch(%r{^spec/factories/(.+)\.rb$}) do |m|
+    rspec.spec.call("models/#{m[1].singularize}")
   end
 
   # Rails config changes
