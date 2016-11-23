@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161122162507) do
+ActiveRecord::Schema.define(version: 20161123114211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20161122162507) do
   create_table "currency_rates", force: :cascade do |t|
     t.integer  "from_currency_id"
     t.integer  "to_currency_id"
-    t.integer  "buy"
-    t.integer  "sell"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.decimal  "buy",              precision: 8, scale: 2
+    t.decimal  "sell",             precision: 8, scale: 2
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
     t.index ["from_currency_id"], name: "index_currency_rates_on_from_currency_id", using: :btree
     t.index ["to_currency_id"], name: "index_currency_rates_on_to_currency_id", using: :btree
   end
