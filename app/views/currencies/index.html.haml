@@ -1,0 +1,5 @@
+Select currency to view statistics
+
+%div
+  - @currencies.each do |currency|
+    = link_to currency.symbol, "#", class: :currency_button
