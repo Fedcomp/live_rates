@@ -26,6 +26,8 @@ GEM
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
     active_interaction (3.4.0)
       activemodel (>= 4, < 6)
+    active_link_to (1.0.3)
+      actionpack
     activejob (5.0.0.1)
       activesupport (= 5.0.0.1)
       globalid (>= 0.3.6)
@@ -271,6 +273,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_interaction (~> 3.4)
+  active_link_to
   bootstrap-sass (~> 3.3.6)
   chartkick
   coffee-rails (~> 4.2)
