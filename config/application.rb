@@ -13,5 +13,13 @@ module LiveRates
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+
+    config.currency_rate_intervals = {
+      weekly:    1.week,
+      daily:     1.day,
+      six_hours: 6.hours
+    }
+
+    config.currency_rate_default_interval = :daily
   end
 end

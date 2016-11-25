@@ -7,7 +7,7 @@ after :currencies do
     # Find current point date
     date = Time.at(week_ago.to_i + (15.minutes * i))
     sell = 0.9 + rand(-0.001..0.001)
-    buy = sell - rand(0.001..0.0011)
+    buy = sell - rand(0.01..0.011)
 
     currencies.to_a.permutation.map do |from_currency, to_currency|
       {

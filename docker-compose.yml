@@ -10,7 +10,6 @@ web: &web
     - live_rates_gems:/usr/local/bundle
   links:
     - db
-    - rate_updater
   ports:
     - 3000:3000
   env_file: docker/rails/development.env

@@ -49,7 +49,9 @@ group :development, :test do
 end
 
 group :test do
+  gem "db-query-matchers"
   gem "database_cleaner"
   gem "shoulda-matchers"
   gem "webmock"
+  gem "timecop"
 end

@@ -1,13 +1,19 @@
 %h2 Exchange rate for #{@current_currency.symbol} (#{@current_currency.code})
 %br
 %ul.nav.nav-tabs
-  - # TODO: Intervals in application configuration
-  = active_link_to "6 hours", currency_path(@current_currency, interval: :six_hours), wrap_tag: :li, active: :exact
-  = active_link_to "Daily",   currency_path(@current_currency, interval: :daily),     wrap_tag: :li, active: :exact
-  = active_link_to "Weekly",  currency_path(@current_currency, interval: :weekly),    wrap_tag: :li, active: :exact
+  - Rails.application.config.currency_rate_intervals.each do |interval_name, _offset|
+    = active_link_to t(".#{interval_name}"),
+                     currency_path(@current_currency, interval: interval_name),
+                     wrap_tag: :li, active: :exact
 %br
 
-- @currencies.each do |currency|
-  - next if currency == @current_currency # skip current currency from comparison
-  %h4 compared to #{currency.symbol} (#{currency.code})
+- @to_currencies.each do |currency|
+  %h4 compared to #{currency.symbol} (#{currency.code}).
+  %p
+    = "#{@current_interval.capitalize} average:"
+    - average = @current_currency.average_rate_against(currency, interval: @current_interval)
+    buy:
+    = number_to_currency average[:buy], unit: ""
+    sell:
+    = number_to_currency average[:sell], unit: ""
   = rate_chart_for_currency(currency, @rates)

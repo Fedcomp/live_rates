@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20161123193147) do
   create_table "currency_rates", force: :cascade do |t|
     t.integer  "from_currency_id"
     t.integer  "to_currency_id"
-    t.decimal  "buy",              precision: 15, scale: 12
-    t.decimal  "sell",             precision: 15, scale: 12
+    t.decimal  "buy",              precision: 15, scale: 10
+    t.decimal  "sell",             precision: 15, scale: 10
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.index ["from_currency_id"], name: "index_currency_rates_on_from_currency_id", using: :btree

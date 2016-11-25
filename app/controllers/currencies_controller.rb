@@ -4,23 +4,30 @@ class CurrenciesController < ApplicationController
   end
 
   def show
-    @currencies = Currency.all
-    @current_currency = @currencies.detect { |c| c.id == params[:id].to_i }
+    @current_interval = params[:interval].to_sym
+    @current_currency, @to_currencies = currencies
     @rates = rates_by_interval
   end
 
   private
 
-  def rates_by_interval
-    interval = intervals[params[:interval].to_sym]
-    @current_currency.from_rates.where(created_at: interval)
+  # @return [Array] Current currency and currencies to match against
+  def currencies
+    to_currencies = Currency.all
+    current_currency = to_currencies.detect { |c| c.id == params[:id].to_i }
+    to_currencies -= [current_currency]
+    [current_currency, to_currencies]
   end
 
-  def intervals
-    {
-      six_hours:  6.hours.ago..Time.current,
-      daily:      1.day.ago..Time.current,
-      weekly:     1.week.ago..Time.current
-    }
+  def rates_by_interval
+    @current_currency.from_rates.where(created_at: current_interval)
+  end
+
+  def current_interval
+    interval = Rails.application
+                    .config
+                    .currency_rate_intervals[@current_interval]
+
+    interval.seconds.ago..Time.current
   end
 end
