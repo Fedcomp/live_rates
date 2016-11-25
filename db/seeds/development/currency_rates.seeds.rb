@@ -1,4 +1,6 @@
 after :currencies do
+  next if CurrencyRate.count.positive?
+
   currencies = Currency.all
   week_ago = 1.week.ago.beginning_of_day
   points_amount = 1.week / 15.minutes
