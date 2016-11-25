@@ -1,4 +1,6 @@
 class CurrenciesController < ApplicationController
+  OPTIMAL_POINTS = 100
+
   def index
     @currencies = Currency.all
   end
