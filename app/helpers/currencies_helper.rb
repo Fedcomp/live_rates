@@ -3,29 +3,27 @@ module CurrenciesHelper
 
   def rate_chart_for_currency(currency, rates)
     elements = rates.select { |r| r.to_currency_id == currency.id }
-    plot_data = [:buy, :sell].map do |direction|
-      # data => value
-      direction_data = elements.map do |e|
-        { e.created_at => e.send(direction) }
-      end.reduce({}, :merge)
 
-      if direction_data.count > OPTIMAL_CHART_POINTS &&
-         direction_data.count / OPTIMAL_CHART_POINTS >= 2
-        scale = direction_data.count / OPTIMAL_CHART_POINTS
+    line_chart [
+      { name: :buy,  data: optimize_chart(elements.map { |e| [e.created_at, e.buy]  }) },
+      { name: :sell, data: optimize_chart(elements.map { |e| [e.created_at, e.sell] }) }
+    ]
+  end
 
-        direction_data = direction_data.each_slice(scale).map do |slice|
-          slice = Hash[slice]
+  private
 
-          average_time = Time.at(slice.keys.map(&:to_f).sum / slice.count)
-          average_value = slice.values.sum / slice.count
+  # out of ideas how to optimize it for rubocop
+  # rubocop:disable Metrics/AbcSize
+  def optimize_chart(data)
+    scale = data.count / OPTIMAL_CHART_POINTS
+    return data unless scale >= 2
 
-          { average_time => average_value }
-        end.reduce({}, :merge)
-      end
-
-      { name: direction, data: direction_data }
+    data.each_slice(scale).map do |slice|
+      [
+        # average time between first and last positions of slice
+        slice.first.first + ((slice.last.first - slice.first.first).to_f / 2),
+        (slice.map(&:last).sum / slice.count)
+      ]
     end
-
-    line_chart plot_data
   end
 end

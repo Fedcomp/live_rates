@@ -2,18 +2,18 @@
 %br
 %ul.nav.nav-tabs
   - Rails.application.config.currency_rate_intervals.each do |interval_name, _offset|
-    = active_link_to t(".#{interval_name}"),
+    = active_link_to t("intervals.#{interval_name}"),
                      currency_path(@current_currency, interval: interval_name),
                      wrap_tag: :li, active: :exact
 %br
 
 - @to_currencies.each do |currency|
-  %h4 compared to #{currency.symbol} (#{currency.code}).
+  %h4 compared to #{currency.code} (#{currency.symbol}).
   %p
-    = "#{@current_interval.capitalize} average:"
     - average = @current_currency.average_rate_against(currency, interval: @current_interval)
-    buy:
-    = number_to_currency average[:buy], unit: ""
-    sell:
-    = number_to_currency average[:sell], unit: ""
+    %b
+      = t("intervals.#{@current_interval}")
+      average:
+    buy:  #{number_with_precision average[:buy]}
+    sell: #{number_with_precision average[:sell]}
   = rate_chart_for_currency(currency, @rates)
