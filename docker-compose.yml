@@ -3,7 +3,7 @@ db:
   volumes:
     - live_rates_database:/var/lib/postgresql/data
 
-web: &web
+backend: &backend
   build: .
   volumes:
     - .:/app
@@ -15,13 +15,13 @@ web: &web
   env_file: docker/rails/development.env
 
 test:
-  <<: *web
+  <<: *backend
   command: ["bundle", "exec", "guard"]
   ports: []
   env_file: docker/rails/test.env
 
 rate_updater:
-  <<: *web
+  <<: *backend
   links:
     - db
   ports: []
