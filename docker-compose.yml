@@ -1,28 +1,34 @@
-db:
-  image: postgres:9.6
-  volumes:
-    - live_rates_database:/var/lib/postgresql/data
+version: '3'
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      - live_rates_database:/var/lib/postgresql/data
 
-backend: &backend
-  build: .
-  volumes:
-    - .:/app
-    - live_rates_gems:/usr/local/bundle
-  links:
-    - db
-  ports:
-    - 3000:3000
-  env_file: docker/rails/development.env
+  backend: &backend
+    build: .
+    volumes:
+      - .:/app
+      - live_rates_gems:/usr/local/bundle
+    depends_on:
+      - db
+    ports:
+      - 3000:3000
+    env_file: docker/rails/development.env
 
-test:
-  <<: *backend
-  command: ["bundle", "exec", "guard"]
-  ports: []
-  env_file: docker/rails/test.env
+  backend_test:
+    <<: *backend
+    command: ["bundle", "exec", "guard"]
+    ports: []
+    env_file: docker/rails/test.env
 
-rate_updater:
-  <<: *backend
-  links:
-    - db
-  ports: []
-  command: ["bundle", "exec", "rake", "exchange_rates:update_daemon"]
+  rate_updater:
+    <<: *backend
+    depends_on:
+      - db
+    ports: []
+    command: ["bundle", "exec", "rake", "exchange_rates:update_daemon"]
+
+volumes:
+  live_rates_gems:
+  live_rates_database:

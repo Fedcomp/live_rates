@@ -17,5 +17,5 @@ docker-compose up web
 # Development
 To run ready to use test environment run:
 ```sh
-docker-compose run test
+docker-compose run --rm backend_test
 ```
