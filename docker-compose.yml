@@ -12,7 +12,9 @@ services:
       - database:/var/lib/postgresql/data
 
   backend: &backend
-    build: .
+    build:
+      context: .
+      dockerfile: docker/rails/Dockerfile
     volumes:
       - .:/app
       - gems:/usr/local/bundle
