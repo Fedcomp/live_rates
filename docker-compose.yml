@@ -2,6 +2,12 @@ version: '3'
 services:
   db:
     image: postgres:9.6
+    environment:
+      # You may also use "POSTGRES_HOST_AUTH_METHOD=trust" to allow all
+      # connections without a password. This is *not* recommended.
+      # ------------------------------------------
+      # but for local app we may use it, right? ;)
+      - POSTGRES_HOST_AUTH_METHOD=trust
     volumes:
       - database:/var/lib/postgresql/data
 
