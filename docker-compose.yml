@@ -3,13 +3,13 @@ services:
   db:
     image: postgres:9.6
     volumes:
-      - live_rates_database:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
 
   backend: &backend
     build: .
     volumes:
       - .:/app
-      - live_rates_gems:/usr/local/bundle
+      - gems:/usr/local/bundle
     depends_on:
       - db
     ports:
@@ -30,5 +30,5 @@ services:
     command: ["bundle", "exec", "rake", "exchange_rates:update_daemon"]
 
 volumes:
-  live_rates_gems:
-  live_rates_database:
+  gems:
+  database:
